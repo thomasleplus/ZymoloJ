@@ -6,7 +6,7 @@
   <name>ZymoloJ</name>
   <packaging>jar</packaging>
   <description>Java framework for beer brewers.</description>
-  <url>https://github.com/thomasleplus/zymoloj</url>
+  <url>https://github.com/thomasleplus/ZymoloJ</url>
   <licenses>
     <license>
       <name>The Apache Software License, Version 2.0</name>
@@ -15,9 +15,9 @@
     </license>
   </licenses>
   <scm>
-    <url>https://github.com/thomasleplus/zymoloj</url>
-    <connection>scm:git:https://github.com/thomasleplus/zymoloj.git</connection>
-    <developerConnection>scm:git:git@github.com:thomasleplus/zymoloj.git</developerConnection>
+    <url>https://github.com/thomasleplus/ZymoloJ</url>
+    <connection>scm:git:https://github.com/thomasleplus/ZymoloJ.git</connection>
+    <developerConnection>scm:git:git@github.com:thomasleplus/ZymoloJ.git</developerConnection>
   </scm>
   <organization>
     <name>Leplus.org</name>
@@ -25,7 +25,7 @@
   </organization>
   <issueManagement>
     <system>GitHub</system>
-    <url>https://github.com/thomasleplus/zymoloj/issues</url>
+    <url>https://github.com/thomasleplus/ZymoloJ/issues</url>
   </issueManagement>
   <developers>
     <developer>
@@ -45,23 +45,9 @@
   </properties>
   <dependencies>
     <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-api</artifactId>
-      <version>5.7.0</version>
-      <scope>test</scope>
-    </dependency>
-    <!-- Only required to run tests in an IDE that bundles an older version -->
-    <dependency>
-      <groupId>org.junit.platform</groupId>
-      <artifactId>junit-platform-launcher</artifactId>
-      <version>1.7.0</version>
-      <scope>test</scope>
-    </dependency>
-    <!-- Only required to run tests in an IDE that bundles an older version -->
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-engine</artifactId>
-      <version>5.7.0</version>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.13.1</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -72,6 +58,20 @@
     </dependency>
   </dependencies>
   <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.pitest</groupId>
+          <artifactId>pitest-maven</artifactId>
+          <version>1.5.2</version>
+        </plugin>
+        <plugin>
+          <groupId>org.sonarsource.scanner.maven</groupId>
+          <artifactId>sonar-maven-plugin</artifactId>
+          <version>3.7.0.1746</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -83,17 +83,6 @@
           <showDeprecation>true</showDeprecation>
           <showWarnings>true</showWarnings>
         </configuration>
-      </plugin>
-      <plugin>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <version>2.22.2</version>
-        <dependencies>
-          <dependency>
-            <groupId>org.junit.platform</groupId>
-            <artifactId>junit-platform-surefire-provider</artifactId>
-            <version>1.3.2</version>
-          </dependency>
-        </dependencies>
       </plugin>
       <plugin>
         <groupId>org.jacoco</groupId>
@@ -111,6 +100,18 @@
             <phase>prepare-package</phase>
             <goals>
               <goal>report</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+	<groupId>org.owasp</groupId>
+        <artifactId>dependency-check-maven</artifactId>
+        <version>6.0.3</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>check</goal>
             </goals>
           </execution>
         </executions>
@@ -135,9 +136,14 @@
         <version>3.14.0</version>
       </plugin>
       <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>findbugs-maven-plugin</artifactId>
-        <version>3.0.5</version>
+	<groupId>com.github.spotbugs</groupId>
+	<artifactId>spotbugs-maven-plugin</artifactId>
+	<version>4.1.4</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+        <version>3.1.1</version>
       </plugin>
       <plugin>
         <groupId>org.jacoco</groupId>
