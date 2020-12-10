@@ -24,6 +24,9 @@ jobs:
         java-version: ${{ matrix.java }}
     - name: Build with Maven
       run: ./mvnw --batch-mode --errors --fail-at-end --show-version -DinstallAtEnd=true -DdeployAtEnd=true verify
+    - name: Scan with SonarCloud
+      if: ${{ matrix.java == 8 }}
+      run: ./mvnw --batch-mode --errors --fail-at-end --show-version -DinstallAtEnd=false -DdeployAtEnd=false org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
     - name: Upload artifacts
       uses: actions/upload-artifact@master
       with:
