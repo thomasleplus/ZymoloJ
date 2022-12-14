@@ -19,4 +19,4 @@ jobs:
     - name: Install OSV Scanner
       run: go install github.com/google/osv-scanner/cmd/osv-scanner@v1
     - name: OSV Scanner
-      run: go run ./cmd/osv-scanner -r .
+      run: osv-scanner -r .
