@@ -21,4 +21,4 @@ jobs:
     - name: Install OSV Scanner
       run: go install github.com/google/osv-scanner/cmd/osv-scanner@v1
     - name: OSV Scanner
-      run: osv-scanner -r .
+      run: 'PATH="${PATH}:$(go env GOPATH)/bin" osv-scanner -r .'
