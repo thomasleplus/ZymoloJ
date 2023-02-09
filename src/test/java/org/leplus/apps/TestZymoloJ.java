@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
  * @author thomas
  *
  */
-class TestZymoloJ {
+public class TestZymoloJ {
 
     @Test
     void test() {
